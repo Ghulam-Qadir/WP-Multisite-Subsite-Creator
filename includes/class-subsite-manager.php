@@ -45,16 +45,16 @@ class WPMSS_Subsite_Manager {
 
 		// Switch to subsite to configure it
 		switch_to_blog( $blog_id );
-	$default_theme = 'twentytwentythree';
-if ( wp_get_theme( $default_theme )->exists() ) {
-    switch_theme( $default_theme );
-}
+		$default_theme = 'twentytwentythree';
+		if ( wp_get_theme( $default_theme )->exists() ) {
+			switch_theme( $default_theme );
+		}
 
-// Activate plugin if it exists
-$default_plugin = 'akismet/akismet.php';
-if ( file_exists( WP_PLUGIN_DIR . '/' . $default_plugin ) ) {
-    activate_plugin( $default_plugin, '', false, true );
-}
+		// Activate plugin if it exists
+		$default_plugin = 'akismet/akismet.php';
+		if ( file_exists( WP_PLUGIN_DIR . '/' . $default_plugin ) ) {
+			activate_plugin( $default_plugin, '', false, true );
+		}
 
 		// Create custom upload folder (e.g., wp-content/uploads/wp_subsite_11)
 		$upload_dir = wp_upload_dir(); // Runs the upload_dir filter
