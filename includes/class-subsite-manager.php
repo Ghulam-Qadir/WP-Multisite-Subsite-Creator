@@ -45,16 +45,15 @@ class WPMSS_Subsite_Manager {
 
 		// Switch to subsite to configure it
 		switch_to_blog( $blog_id );
+		$default_theme = 'twentytwenty';
+		if ( wp_get_theme( $default_theme )->exists() ) {
+			switch_theme( $default_theme );
+		}
 
-		update_option( 'template', 'twentytwentyfour' );
-		update_option( 'stylesheet', 'twentytwentyfour' );
-
-		// Activate default plugins
-		$plugins = ['hello.php']; // Add more plugins here
-		foreach ( $plugins as $plugin ) {
-			if ( is_wp_error( $err = activate_plugin( $plugin ) ) ) {
-				error_log( "Plugin activation error: " . $err->get_error_message() );
-			}
+// Activate plugin if it exists
+		$default_plugin = 'wp-crontrol/wp-crontrol.php';
+		if ( file_exists( WP_PLUGIN_DIR . '/' . $default_plugin ) ) {
+			activate_plugin( $default_plugin, '', false, true );
 		}
 
 		// Create custom upload folder (e.g., wp-content/uploads/wp_subsite_11)
